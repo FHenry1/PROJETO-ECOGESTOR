@@ -1,47 +1,92 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="EcoGestor: protótipo acadêmico de gerenciamento de resíduos de unidades de saúde.">
+  <meta name="description" content="EcoGestor: gerenciamento de resíduos de unidades de saúde.">
   <title>Unidades | EcoGestor</title>
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
+
 </head>
+
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <div class="app">
-  
-
     <aside class="sidebar">
-      <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="38" height="38"><span><strong>EcoGestor</strong><small>PROJETO ECOGESTOR</small></span></a>
+      <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="38"
+          height="38"><span><strong>EcoGestor</strong><small>PROJETO ECOGESTOR</small></span></a>
       <nav aria-label="Menu principal">
         <p class="nav-label">Gerenciamento</p>
         <ul>
           <li><a href="painel.html"><span class="nav-icon" aria-hidden="true">◫</span>Visão geral</a></li>
           <li><a href="residuos.html"><span class="nav-icon" aria-hidden="true">♲</span>Resíduos</a></li>
-          <li><a href="unidades.html" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span>Unidades</a></li>
+          <li><a href="unidades.html" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span>Unidades</a>
+          </li>
           <li><a href="registro.html"><span class="nav-icon" aria-hidden="true">＋</span>Entrada manual</a></li>
           <li><a href="checklist.html"><span class="nav-icon" aria-hidden="true">☑</span>Checklist</a></li>
           <li><a href="configuracoes.html"><span class="nav-icon" aria-hidden="true">⚙</span>Configurações</a></li>
         </ul>
       </nav>
-      <div class="sidebar-bottom"><span class="badge">Versão acadêmica</span><p>Um cuidado a mais com o futuro.</p><a href="indssex.html">← Voltar à apresentação</a></div>
+      <div class="sidebar-bottom"><span class="badge">Versão acadêmica</span>
+        <p>Um cuidado a mais com o futuro.</p><a href="index.html">← Voltar à apresentação</a>
+      </div>
     </aside>
     <div class="workspace">
-      <header class="topbar"><span>EcoGestor / Unidades</span><span class="profile"><span class="avatar" aria-hidden="true">EG</span><span class="profile-name">Visitante</span><span class="badge">Demonstração</span></span></header>
+      <header class="topbar"><span>EcoGestor / Unidades</span><span class="profile"><span class="avatar"
+            aria-hidden="true">EG</span><span class="profile-name">Visitante</span><span
+            class="badge">Demonstração</span></span></header>
       <main id="conteudo" class="content">
-        <div class="page-heading"><div><p class="eyebrow">Gestão de resíduos de saúde</p><h1>Unidades</h1><p class="description">Conheça os locais incluídos nesta demonstração.</p></div></div>
-        <p class="notice">As quatro unidades e seus endereços são fictícios. Abra os detalhes de cada cartão para consultar as informações.</p>
-        <section class="grid-3" aria-label="Lista de unidades">
-          <article class="panel unit-card"><span class="badge">Unidade demonstrativa</span><h2>Unidade Centro</h2><p>João Pessoa · PB</p><details><summary>Informações da unidade</summary><p>Endereço fictício: Rua das Palmeiras, 120.</p><p>Volume em setembro de 2026: <strong>440 kg</strong>.</p><p><a href="registro.html">Abrir formulário de registro →</a></p></details></article>
-          <article class="panel unit-card"><span class="badge">Unidade demonstrativa</span><h2>Unidade Norte</h2><p>Guarabira · PB</p><details><summary>Informações da unidade</summary><p>Endereço fictício: Rua do Sol, 45.</p><p>Volume em setembro de 2026: <strong>330 kg</strong>.</p><p><a href="registro.html">Abrir formulário de registro →</a></p></details></article>
-          <article class="panel unit-card"><span class="badge">Unidade demonstrativa</span><h2>Unidade Sul</h2><p>Santa Rita · PB</p><details><summary>Informações da unidade</summary><p>Endereço fictício: Avenida das Flores, 210.</p><p>Volume em setembro de 2026: <strong>220 kg</strong>.</p><p><a href="registro.html">Abrir formulário de registro →</a></p></details></article>
-          <article class="panel unit-card"><span class="badge">Unidade demonstrativa</span><h2>Unidade Leste</h2><p>Bayeux · PB</p><details><summary>Informações da unidade</summary><p>Endereço fictício: Rua do Jardim, 32.</p><p>Volume em setembro de 2026: <strong>90 kg</strong>.</p><p><a href="registro.html">Abrir formulário de registro →</a></p></details></article>
+        <div class="page-heading">
+          <div>
+            <p class="eyebrow">Gestão de resíduos de saúde</p>
+            <h1>Unidades</h1>
+            <p class="description">Cadastre, edite e exclua as unidades acompanhadas. Os dados ficam salvos neste
+              navegador.</p>
+          </div>
+        </div>
+
+        <p id="mensagem-form" class="notice" role="status" aria-live="polite" hidden></p>
+
+        <form id="form-unidade" class="panel" novalidate aria-labelledby="titulo-form">
+          <fieldset>
+            <legend id="titulo-form">Nova unidade</legend>
+            <div class="grid-2">
+              <div class="field"><label for="nome">Nome da unidade</label><input id="nome" name="nome" type="text"
+                  maxlength="60" placeholder="Ex.: Unidade Oeste" required></div>
+              <div class="field"><label for="cidade">Cidade</label><input id="cidade" name="cidade" type="text"
+                  maxlength="60" placeholder="Ex.: Cabedelo" required></div>
+            </div>
+            <div class="field"><label for="endereco">Endereço (opcional)</label><input id="endereco" name="endereco"
+                type="text" maxlength="120" placeholder="Rua, número"></div>
+          </fieldset>
+          <div class="actions">
+            <button id="btn-salvar" class="button" type="submit">Cadastrar unidade</button>
+            <button id="btn-cancelar" class="button secondary" type="button" hidden>Cancelar edição</button>
+          </div>
+        </form>
+
+        <section aria-labelledby="titulo-lista" class="lista-unidades-secao">
+          <div class="section-heading">
+            <div>
+              <h2 id="titulo-lista">Unidades cadastradas</h2>
+              <p id="contador-unidades" class="muted" aria-live="polite"></p>
+            </div>
+            <div class="field busca"><label for="busca-unidade" class="visually-hidden">Buscar unidade</label><input
+                id="busca-unidade" type="search" placeholder="Buscar por nome ou cidade"></div>
+          </div>
+          <div id="lista-unidades" class="grid-3" aria-live="polite"></div>
         </section>
-        <footer class="footer">EcoGestor · Projeto acadêmico · Dados fictícios para apresentação.</footer>
+
+        <p class="description"><button id="btn-restaurar" class="button secondary" type="button">Restaurar dados de
+            demonstração</button></p>
+        <footer class="footer">EcoGestor · Projeto acadêmico · Dados salvos apenas neste navegador.</footer>
       </main>
     </div>
   </div>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/unidades.js"></script>
 </body>
+
 </html>
