@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="EcoGestor: protótipo acadêmico de gerenciamento de resíduos de unidades de saúde.">
+  <title>Configurações | EcoGestor</title>
+  <link rel="icon" href="assets/img/logo.png" type="image/png">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <div class="app">
+   
+    
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="38" height="38"><span><strong>EcoGestor</strong><small>PROJETO ECOGESTOR</small></span></a>
+      <nav aria-label="Menu principal">
+        <p class="nav-label">Gerenciamento</p>
+        <ul>
+          <li><a href="painel.html"><span class="nav-icon" aria-hidden="true">◫</span>Visão geral</a></li>
+          <li><a href="residuos.html"><span class="nav-icon" aria-hidden="true">♲</span>Resíduos</a></li>
+          <li><a href="unidades.html"><span class="nav-icon" aria-hidden="true">▦</span>Unidades</a></li>
+          <li><a href="registro.html"><span class="nav-icon" aria-hidden="true">＋</span>Entrada manual</a></li>
+          <li><a href="checklist.html"><span class="nav-icon" aria-hidden="true">☑</span>Checklist</a></li>
+          <li><a href="configuracoes.html" aria-current="page"><span class="nav-icon" aria-hidden="true">⚙</span>Configurações</a></li>
+        </ul>
+      </nav>
+      <div class="sidebar-bottom"><span class="badge">Versão acadêmica</span><p>Um cuidado a mais com o futuro.</p><a href="index.html">← Voltar à apresentação</a></div>
+    </aside>
+    <div class="workspace">
+      <header class="topbar"><span>EcoGestor / Configurações</span><span class="profile"><span class="avatar" aria-hidden="true">EG</span><span class="profile-name">Visitante</span><span class="badge">Demonstração</span></span></header>
+      <main id="conteudo" class="content">
+        <div class="page-heading"><div><p class="eyebrow">Gestão de resíduos de saúde</p><h1>Configurações</h1><p class="description">Conheça o modelo de preferências do gestor.</p></div></div>
+        <p class="notice" id="aviso-configuracoes">As alterações nesta tela são apenas demonstrativas. Não modificam o perfil, a aparência ou o envio de notificações.</p>
+        <form class="panel" aria-describedby="aviso-configuracoes">
+          <fieldset><legend>Perfil do gestor</legend><div class="grid-2"><div class="field"><label for="nome">Nome completo</label><input id="nome" type="text" placeholder="Seu nome"></div><div class="field"><label for="email">E-mail</label><input id="email" type="email" placeholder="nome@exemplo.com"></div></div></fieldset>
+          <fieldset><legend>Preferências de notificação</legend><p class="form-note">Modelo visual de opções para uma etapa futura.</p><label class="check-label"><input type="checkbox">Receber resumo mensal por e-mail</label><label class="check-label"><input type="checkbox">Receber lembretes de preenchimento</label></fieldset>
+          <div class="actions"><button class="button" type="button" disabled>Salvar (indisponível nesta versão)</button><button class="button secondary" type="reset">Restaurar campos</button></div>
+        </form>
+        <footer class="footer">EcoGestor · Projeto acadêmico · Dados fictícios para apresentação.</footer>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
