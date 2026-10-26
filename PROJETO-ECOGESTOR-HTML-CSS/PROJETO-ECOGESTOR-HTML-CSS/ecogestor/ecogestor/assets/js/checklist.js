@@ -1,3 +1,4 @@
+/* EcoGestor — Checklist do colaborador */
 (function () {
   'use strict';
 
@@ -19,6 +20,7 @@
   var itens = Array.prototype.slice.call(document.querySelectorAll('fieldset[data-item]'));
   var TOTAL = itens.length;
 
+  /* Mapas lidos da própria página: chave do item -> texto; seção -> chaves */
   var textoDoItem = {};
   var estrutura = secoes.map(function (secao) {
     var chaves = Array.prototype.slice.call(secao.querySelectorAll('fieldset[data-item]')).map(function (f) {
@@ -51,6 +53,7 @@
     return r;
   }
 
+  /* Conformidade = C / (C + NC); "não se aplica" não entra na conta */
   function calcular(respostas, chaves) {
     var c = 0, nc = 0, na = 0;
     chaves.forEach(function (k) {
@@ -93,7 +96,7 @@
     return p.length === 3 ? p[2] + '/' + p[1] + '/' + p[0] : iso;
   }
 
-
+  /* ---- Salvar ---- */
   form.addEventListener('submit', function (evento) {
     evento.preventDefault();
     form.querySelectorAll('[aria-invalid]').forEach(function (c) { c.removeAttribute('aria-invalid'); });
@@ -146,6 +149,7 @@
 
   form.addEventListener('change', atualizarProgresso);
 
+  /* ---- Histórico ---- */
   function classePct(p) {
     if (p === null) return '';
     return p >= 90 ? '' : ' orange';
@@ -206,7 +210,7 @@
     desenharHistorico();
   });
 
-
+  /* ---- Início ---- */
   EcoStore.preencherSelectUnidades(selectUnidade);
   campoData.value = hoje();
   if (!EcoStore.listar('unidades').length) {

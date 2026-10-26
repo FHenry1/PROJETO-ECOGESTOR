@@ -1,3 +1,4 @@
+/* EcoGestor — Configurações (perfil e preferências) */
 (function () {
   'use strict';
 

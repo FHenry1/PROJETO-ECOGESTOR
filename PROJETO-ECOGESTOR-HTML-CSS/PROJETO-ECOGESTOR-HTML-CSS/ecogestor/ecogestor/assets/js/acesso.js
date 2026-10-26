@@ -1,6 +1,7 @@
 /* EcoGestor — telas de login e cadastro */
 (function () {
   'use strict';
+  window.__acessoCarregado = true;
 
   var params = new URLSearchParams(window.location.search);
   var destino = EcoAuth.destinoSeguro(params.get('destino'));

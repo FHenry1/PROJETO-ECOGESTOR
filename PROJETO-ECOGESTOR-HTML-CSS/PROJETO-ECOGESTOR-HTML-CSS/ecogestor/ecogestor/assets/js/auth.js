@@ -1,3 +1,6 @@
+/* EcoGestor — autenticação e modo demonstração (sem servidor)
+   Atenção: tudo fica no navegador. Serve para a apresentação acadêmica e
+   NÃO substitui um login real com backend. */
 (function () {
   'use strict';
 
@@ -32,7 +35,7 @@
     return paraHex(bytes);
   }
 
-
+  /* PBKDF2 quando o navegador permite; hash simples como alternativa */
   function gerarHash(senha, sal) {
     var subtle = window.crypto && window.crypto.subtle;
     if (!subtle) {
@@ -55,12 +58,12 @@
     return (a + b).toUpperCase();
   }
 
-
+  /* Só aceita destinos locais simples (evita redirecionar para outro site) */
   function destinoSeguro(valor) {
     return /^[a-z0-9-]+\.html$/i.test(valor || '') ? valor : 'painel.html';
   }
 
-
+  /* ---- Modo demonstração: mesmas telas, outro conjunto de dados ---- */
   function emDemo() {
     try { return localStorage.getItem(CHAVE_MODO) === 'demo'; } catch (e) { return false; }
   }

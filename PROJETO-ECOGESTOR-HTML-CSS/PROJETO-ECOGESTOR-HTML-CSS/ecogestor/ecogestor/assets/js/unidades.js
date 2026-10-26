@@ -95,9 +95,9 @@
     form.querySelectorAll('[aria-invalid]').forEach(function (campo) { campo.removeAttribute('aria-invalid'); });
 
     var dados = {
-      nome: form.nome.value.trim(),
-      cidade: form.cidade.value.trim(),
-      endereco: form.endereco.value.trim()
+      nome: form.elements.nome.value.trim(),
+      cidade: form.elements.cidade.value.trim(),
+      endereco: form.elements.endereco.value.trim()
     };
 
     var erros = validar(dados);
@@ -136,14 +136,14 @@
 
     if (botao.getAttribute('data-acao') === 'editar') {
       editandoId = id;
-      form.nome.value = unidade.nome;
-      form.cidade.value = unidade.cidade;
-      form.endereco.value = unidade.endereco || '';
+      form.elements.nome.value = unidade.nome;
+      form.elements.cidade.value = unidade.cidade;
+      form.elements.endereco.value = unidade.endereco || '';
       titulo.textContent = 'Editar unidade';
       botaoSalvar.textContent = 'Salvar alterações';
       botaoCancelar.hidden = false;
       avisar('');
-      form.nome.focus();
+      form.elements.nome.focus();
       form.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
@@ -162,11 +162,17 @@
     desenhar();
   });
 
-  document.getElementById('btn-restaurar').addEventListener('click', function () {
-    if (!window.confirm('Restaurar os dados de demonstração? Unidades e registros atuais serão substituídos.')) return;
+  var botaoDados = document.getElementById('btn-restaurar');
+  var ehDemo = EcoStore.modo === 'demo';
+  botaoDados.textContent = ehDemo ? 'Restaurar dados de demonstração' : 'Apagar todos os meus dados';
+  botaoDados.addEventListener('click', function () {
+    var pergunta = ehDemo
+      ? 'Restaurar os dados de demonstração? Unidades e registros atuais serão substituídos.'
+      : 'Apagar TODAS as unidades, registros e checklists salvos? Esta ação não pode ser desfeita.';
+    if (!window.confirm(pergunta)) return;
     EcoStore.restaurarDemonstracao();
     limparFormulario();
-    avisar('Dados de demonstração restaurados.');
+    avisar(ehDemo ? 'Dados de demonstração restaurados.' : 'Todos os dados foram apagados.');
     desenhar();
   });
 
