@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="EcoGestor: protótipo acadêmico de gerenciamento de resíduos de unidades de saúde.">
+  <meta name="description" content="EcoGestor: gerenciamento de resíduos de unidades de saúde.">
   <title>Entrada manual | EcoGestor</title>
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/auth.js" data-protegido></script>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <div class="app">
-   
-    
     <aside class="sidebar">
       <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="38" height="38"><span><strong>EcoGestor</strong><small>PROJETO ECOGESTOR</small></span></a>
       <nav aria-label="Menu principal">
@@ -29,22 +28,37 @@
       <div class="sidebar-bottom"><span class="badge">Versão acadêmica</span><p>Um cuidado a mais com o futuro.</p><a href="index.html">← Voltar à apresentação</a></div>
     </aside>
     <div class="workspace">
-      <header class="topbar"><span>EcoGestor / Entrada manual</span><span class="profile"><span class="avatar" aria-hidden="true">EG</span><span class="profile-name">Visitante</span><span class="badge">Demonstração</span></span></header>
+      <header class="topbar"><span>EcoGestor / Entrada manual</span><span class="profile"><span class="avatar" aria-hidden="true">EG</span><span class="profile-name"></span></span></header>
       <main id="conteudo" class="content">
-        <div class="page-heading"><div><p class="eyebrow">Gestão de resíduos de saúde</p><h1>Entrada manual</h1><p class="description">Experimente o preenchimento de um registro mensal de resíduos.</p></div></div>
-        <p class="notice" id="limite-formulario">Formulário demonstrativo: os campos podem ser preenchidos, mas os dados não são enviados nem salvos. O total não é calculado automaticamente.</p>
+        <div class="page-heading"><div><p class="eyebrow">Gestão de resíduos de saúde</p><h1>Entrada manual</h1><p class="description">Registre o peso mensal de resíduos de uma unidade. Os dados ficam salvos neste navegador.</p></div></div>
+        <p id="mensagem-form" class="notice" role="status" aria-live="polite" hidden></p>
         <div class="form-layout">
-          <form class="panel" aria-describedby="limite-formulario">
-            <fieldset><legend>01. Unidade e período</legend><div class="field"><label for="unidade">Unidade</label><select id="unidade" required><option value="">Selecione uma unidade</option><option>Unidade Centro — João Pessoa</option><option>Unidade Norte — Guarabira</option><option>Unidade Sul — Santa Rita</option><option>Unidade Leste — Bayeux</option></select></div><div class="field"><label for="competencia">Mês de referência</label><input id="competencia" type="month" value="2026-09" required></div></fieldset>
-            <fieldset><legend>02. Peso dos resíduos</legend><p class="form-note">Informe o peso em quilogramas. Use zero quando não houver registro na semana.</p><div class="grid-2"><div class="field"><label for="semana-1">Semana 1 (kg)</label><input id="semana-1" type="number" min="0" step="0.01" placeholder="0" required></div><div class="field"><label for="semana-2">Semana 2 (kg)</label><input id="semana-2" type="number" min="0" step="0.01" placeholder="0" required></div><div class="field"><label for="semana-3">Semana 3 (kg)</label><input id="semana-3" type="number" min="0" step="0.01" placeholder="0" required></div><div class="field"><label for="semana-4">Semana 4 (kg)</label><input id="semana-4" type="number" min="0" step="0.01" placeholder="0" required></div><div class="field"><label for="semana-5">Semana 5 (kg)</label><input id="semana-5" type="number" min="0" step="0.01" placeholder="0"></div></div></fieldset>
-            <div class="field"><label for="observacoes">Observações</label><textarea id="observacoes" rows="4" placeholder="Anote informações sobre o período."></textarea></div>
-            <div class="actions"><button class="button" type="button" disabled>Salvar (indisponível nesta versão)</button><button class="button secondary" type="reset">Limpar campos</button></div>
+          <form id="form-registro" class="panel" novalidate>
+            <fieldset><legend>01. Unidade e período</legend>
+              <div class="field"><label for="unidade">Unidade</label><select id="unidade" name="unidade" required></select></div>
+              <div class="field"><label for="competencia">Mês de referência</label><input id="competencia" name="competencia" type="month" required></div>
+            </fieldset>
+            <fieldset><legend>02. Peso dos resíduos</legend>
+              <p class="form-note">Informe o peso em quilogramas. Use zero quando não houver registro na semana.</p>
+              <div class="grid-2">
+                <div class="field"><label for="semana-1">Semana 1 (kg)</label><input id="semana-1" class="semana" type="number" min="0" step="0.01" placeholder="0" required></div>
+                <div class="field"><label for="semana-2">Semana 2 (kg)</label><input id="semana-2" class="semana" type="number" min="0" step="0.01" placeholder="0" required></div>
+                <div class="field"><label for="semana-3">Semana 3 (kg)</label><input id="semana-3" class="semana" type="number" min="0" step="0.01" placeholder="0" required></div>
+                <div class="field"><label for="semana-4">Semana 4 (kg)</label><input id="semana-4" class="semana" type="number" min="0" step="0.01" placeholder="0" required></div>
+                <div class="field"><label for="semana-5">Semana 5 (kg)</label><input id="semana-5" class="semana" type="number" min="0" step="0.01" placeholder="0"></div>
+              </div>
+              <p class="total-registro">Total do mês: <strong id="total-registro">0 kg</strong></p>
+            </fieldset>
+            <div class="field"><label for="observacoes">Observações</label><textarea id="observacoes" rows="4" maxlength="500" placeholder="Anote informações sobre o período."></textarea></div>
+            <div class="actions"><button id="btn-salvar" class="button" type="submit">Salvar registro</button><button id="btn-limpar" class="button secondary" type="button">Limpar campos</button></div>
           </form>
-          <aside class="panel"><p class="eyebrow">Sobre o registro</p><h2>Uma unidade, um período.</h2><ol class="helper-list"><li>Escolha a unidade correspondente.</li><li>Informe o mês de referência.</li><li>Distribua o peso entre as semanas.</li><li>Utilize a quinta semana somente quando necessário.</li></ol><p class="form-note">A estrutura mantém os cinco campos semanais do projeto original.</p><a href="residuos.html">Consultar registros de exemplo →</a></aside>
+          <aside class="panel"><p class="eyebrow">Sobre o registro</p><h2>Uma unidade, um período.</h2><ol class="helper-list"><li>Escolha a unidade correspondente.</li><li>Informe o mês de referência.</li><li>Distribua o peso entre as semanas.</li><li>Utilize a quinta semana somente quando necessário.</li></ol><p class="form-note">Se já existir registro da unidade nesse mês, ele é carregado para você editar.</p><p><a href="unidades.html">Gerenciar unidades →</a></p><p><a href="residuos.html">Consultar registros →</a></p></aside>
         </div>
-        <footer class="footer">EcoGestor · Projeto acadêmico · Dados fictícios para apresentação.</footer>
+        <footer class="footer">EcoGestor · Projeto acadêmico · Dados salvos apenas neste navegador.</footer>
       </main>
     </div>
   </div>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/registro.js"></script>
 </body>
 </html>

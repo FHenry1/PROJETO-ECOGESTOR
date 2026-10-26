@@ -1,18 +1,19 @@
-/* EcoGestor — camada de dados (localStorage)
-   Todas as páginas carregam este arquivo antes dos demais scripts. */
 (function () {
   'use strict';
 
-  var PREFIXO = 'ecogestor:';
 
-  var SEED = {
+  var MODO = 'real';
+  try { if (localStorage.getItem('ecogestor:modo') === 'demo') MODO = 'demo'; } catch (e) { /* ignora */ }
+  var PREFIXO = MODO === 'demo' ? 'ecogestor-demo:' : 'ecogestor-dados:';
+
+  var SEED_DEMO = {
     unidades: [
       { id: 'u-centro', nome: 'Unidade Centro', cidade: 'João Pessoa', endereco: 'Rua das Palmeiras, 120' },
       { id: 'u-norte',  nome: 'Unidade Norte',  cidade: 'Guarabira',   endereco: 'Rua do Sol, 45' },
       { id: 'u-sul',    nome: 'Unidade Sul',    cidade: 'Santa Rita',  endereco: 'Avenida das Flores, 210' },
       { id: 'u-leste',  nome: 'Unidade Leste',  cidade: 'Bayeux',      endereco: 'Rua do Jardim, 32' }
     ],
-    // semanas: pesos em kg das semanas 1 a 5 (null = sem registro)
+
     registros: [
       { id: 'r-centro-2026-09', unidadeId: 'u-centro', mes: '2026-09', semanas: [80, 120, 100, 140, 0], obs: '' },
       { id: 'r-norte-2026-09',  unidadeId: 'u-norte',  mes: '2026-09', semanas: [60, 90, 70, 110, 0],  obs: '' },
@@ -22,6 +23,8 @@
     checklists: [],
     usuarios: []
   };
+  var SEED_REAL = { unidades: [], registros: [], checklists: [], usuarios: [] };
+  var SEED = MODO === 'demo' ? SEED_DEMO : SEED_REAL;
 
   function ler(colecao) {
     try {
@@ -52,6 +55,7 @@
   }
 
   var EcoStore = {
+    modo: MODO,
     listar: ler,
     salvarTudo: gravar,
     novoId: novoId,
@@ -91,7 +95,7 @@
       });
     },
 
-    /* ---- Cálculos reutilizados por painel, resíduos e unidades ---- */
+
     totalRegistro: function (registro) {
       return registro.semanas.reduce(function (soma, kg) { return soma + (Number(kg) || 0); }, 0);
     },
@@ -105,7 +109,7 @@
       return meses.length ? meses[meses.length - 1] : null;
     },
 
-    /* ---- Utilidades de interface ---- */
+
     formatarKg: function (valor) {
       return Number(valor).toLocaleString('pt-BR', { maximumFractionDigits: 2 });
     },
@@ -117,7 +121,7 @@
       return nomes[Number(partes[1]) - 1] + ' de ' + partes[0];
     },
 
-    /* Preenche um <select> com as unidades cadastradas */
+
     preencherSelectUnidades: function (select) {
       if (!select) return;
       var valorAtual = select.value;
@@ -135,7 +139,7 @@
       select.value = valorAtual;
     },
 
-    /* Escapa texto digitado pelo usuário antes de usar em innerHTML */
+
     escapar: function (texto) {
       var div = document.createElement('div');
       div.textContent = texto == null ? '' : String(texto);

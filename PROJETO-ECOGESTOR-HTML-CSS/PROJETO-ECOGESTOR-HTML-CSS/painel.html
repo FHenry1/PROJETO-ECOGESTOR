@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="EcoGestor: protótipo acadêmico de gerenciamento de resíduos de unidades de saúde.">
+  <meta name="description" content="EcoGestor: gerenciamento de resíduos de unidades de saúde.">
   <title>Visão geral | EcoGestor</title>
   <link rel="icon" href="assets/img/logo.png" type="image/png">
   <link rel="stylesheet" href="assets/css/style.css">
+  <script src="assets/js/auth.js" data-protegido></script>
 </head>
 <body>
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <div class="app">
-   
-    
     <aside class="sidebar">
       <a class="brand" href="index.html"><img src="assets/img/logo.png" alt="" width="38" height="38"><span><strong>EcoGestor</strong><small>PROJETO ECOGESTOR</small></span></a>
       <nav aria-label="Menu principal">
@@ -29,37 +28,32 @@
       <div class="sidebar-bottom"><span class="badge">Versão acadêmica</span><p>Um cuidado a mais com o futuro.</p><a href="index.html">← Voltar à apresentação</a></div>
     </aside>
     <div class="workspace">
-      <header class="topbar"><span>EcoGestor / Visão geral</span><span class="profile"><span class="avatar" aria-hidden="true">EG</span><span class="profile-name">Visitante</span><span class="badge">Demonstração</span></span></header>
+      <header class="topbar"><span>EcoGestor / Visão geral</span><span class="profile"><span class="avatar" aria-hidden="true">EG</span><span class="profile-name"></span></span></header>
       <main id="conteudo" class="content">
         <div class="page-heading"><div><p class="eyebrow">Gestão de resíduos de saúde</p><h1>Visão geral</h1><p class="description">Acompanhe os indicadores e os registros das unidades.</p></div><a class="button" href="registro.html">＋ Novo registro</a></div>
-        <p class="notice">Você está explorando uma demonstração. Os indicadores abaixo são exemplos fixos de setembro de 2026.</p>
-        <section class="stats" aria-label="Indicadores de setembro de 2026">
-          <article class="panel stat"><p>Total de resíduos</p><strong>1.080 <small>kg</small></strong><small>Somatório das quatro unidades</small></article>
-          <article class="panel stat"><p>Unidades acompanhadas</p><strong>04</strong><small>Quatro cidades da Paraíba</small></article>
-          <article class="panel stat"><p>Média por unidade</p><strong>270 <small>kg</small></strong><small>Referência: setembro de 2026</small></article>
-        </section>
+        <div class="field filtro-mes"><label for="filtro-mes">Mês de referência</label><select id="filtro-mes"></select></div>
+        <section id="indicadores" class="stats" aria-label="Indicadores do mês" aria-live="polite"></section>
         <div class="chart-layout">
-          <section class="panel" aria-labelledby="grafico-titulo"><div class="section-heading"><h2 id="grafico-titulo">Volume por semana</h2><span class="badge">Setembro / 2026</span></div>
-            <figure><div class="chart" aria-hidden="true"><div class="chart-column"><span>200 kg</span><div class="chart-bar w1"></div></div><div class="chart-column"><span>300 kg</span><div class="chart-bar w2"></div></div><div class="chart-column"><span>240 kg</span><div class="chart-bar w3"></div></div><div class="chart-column"><span>340 kg</span><div class="chart-bar w4"></div></div></div><div class="chart-labels" aria-hidden="true"><span>Semana 1</span><span>Semana 2</span><span>Semana 3</span><span>Semana 4</span></div><figcaption>Volume semanal: 200, 300, 240 e 340 kg. Os mesmos valores estão disponíveis na tabela abaixo.</figcaption></figure>
+          <section class="panel" aria-labelledby="grafico-titulo"><div class="section-heading"><h2 id="grafico-titulo">Volume por semana</h2><span class="badge badge-mes"></span></div>
+            <figure><div class="chart" id="grafico" aria-hidden="true"></div><div class="chart-labels" id="grafico-rotulos" aria-hidden="true"></div><figcaption id="grafico-descricao"></figcaption></figure>
           </section>
-          <section class="panel" aria-labelledby="unidades-titulo"><div class="section-heading"><h2 id="unidades-titulo">Por unidade</h2><a href="unidades.html">Ver todas →</a></div><ul class="unit-summary"><li><span>Unidade Centro<br><small class="muted">João Pessoa</small></span><strong>440 kg</strong></li><li><span>Unidade Norte<br><small class="muted">Guarabira</small></span><strong>330 kg</strong></li><li><span>Unidade Sul<br><small class="muted">Santa Rita</small></span><strong>220 kg</strong></li><li><span>Unidade Leste<br><small class="muted">Bayeux</small></span><strong>90 kg</strong></li></ul></section>
+          <section class="panel" aria-labelledby="unidades-titulo"><div class="section-heading"><h2 id="unidades-titulo">Por unidade</h2><a href="unidades.html">Ver todas →</a></div><ul class="unit-summary" id="lista-por-unidade"></ul></section>
         </div>
-        <section class="panel" aria-labelledby="registros-titulo"><div class="section-heading"><h2 id="registros-titulo">Registros do mês</h2><a href="residuos.html">Ver resíduos →</a></div><div class="table-scroll" role="region" aria-label="Registros mensais de resíduos" tabindex="0">
+        <section class="panel" aria-labelledby="registros-titulo"><div class="section-heading"><h2 id="registros-titulo">Registros do mês</h2><a href="residuos.html">Ver resíduos →</a></div>
+        <div class="table-scroll" role="region" aria-label="Registros mensais de resíduos" tabindex="0">
           <table>
-            <caption>Setembro de 2026 · Valores fictícios em quilogramas (kg).</caption>
-            <thead><tr><th scope="col">Unidade</th><th scope="col">Cidade</th><th scope="col">Semana 1</th><th scope="col">Semana 2</th><th scope="col">Semana 3</th><th scope="col">Semana 4</th><th scope="col">Total (kg)</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Unidade Centro</th><td>João Pessoa</td><td>80</td><td>120</td><td>100</td><td>140</td><td>440</td></tr>
-              <tr><th scope="row">Unidade Norte</th><td>Guarabira</td><td>60</td><td>90</td><td>70</td><td>110</td><td>330</td></tr>
-              <tr><th scope="row">Unidade Sul</th><td>Santa Rita</td><td>40</td><td>60</td><td>50</td><td>70</td><td>220</td></tr>
-              <tr><th scope="row">Unidade Leste</th><td>Bayeux</td><td>20</td><td>30</td><td>20</td><td>20</td><td>90</td></tr>
-            </tbody>
-            <tfoot><tr><th scope="row" colspan="2">Total</th><td>200</td><td>300</td><td>240</td><td>340</td><td>1.080</td></tr></tfoot>
+            <caption id="legenda-tabela"></caption>
+            <thead><tr><th scope="col">Unidade</th><th scope="col">Cidade</th><th scope="col">Semana 1</th><th scope="col">Semana 2</th><th scope="col">Semana 3</th><th scope="col">Semana 4</th><th scope="col">Semana 5</th><th scope="col">Total (kg)</th></tr></thead>
+            <tbody id="tabela-corpo"></tbody>
+            <tfoot id="tabela-rodape"></tfoot>
           </table>
         </div></section>
-        <footer class="footer">EcoGestor · Projeto acadêmico · Dados fictícios para apresentação.</footer>
+        <footer class="footer">EcoGestor · Projeto acadêmico · Dados salvos apenas neste navegador.</footer>
       </main>
     </div>
   </div>
+  <script src="assets/js/storage.js"></script>
+  <script src="assets/js/resumo.js"></script>
+  <script src="assets/js/painel.js"></script>
 </body>
 </html>
