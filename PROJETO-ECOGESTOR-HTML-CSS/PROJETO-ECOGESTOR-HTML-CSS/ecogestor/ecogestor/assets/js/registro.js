@@ -36,7 +36,6 @@
     totalEl.textContent = EcoStore.formatarKg(total) + ' kg';
   }
 
-  /* Se a unidade+mês já tem registro, carrega para edição */
   function carregarExistente() {
     var unidadeId = selectUnidade.value;
     var mes = campoMes.value;
@@ -112,7 +111,6 @@
   campoMes.addEventListener('change', carregarExistente);
   document.getElementById('btn-limpar').addEventListener('click', limpar);
 
-  /* Inicialização */
   EcoStore.preencherSelectUnidades(selectUnidade);
   campoMes.value = mesAtual();
   var pedida = new URLSearchParams(window.location.search).get('unidade');
